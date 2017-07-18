@@ -1,0 +1,9 @@
+<%= form_for @movie, remote: true, url: {controller: "movies", action: "create_cast"}, method: :get do |f| %>
+  <%= f.hidden_field :id, :value => @movie.id, name: "movie_id" %>
+
+  <%= f.fields_for :actors do |actor| %>
+    <%= actor.select :id, options_from_collection_for_select(@not_included_actors, 'id', 'name'), {prompt: "Select Actor"}, class: "form-control", name: "actor_id", style: "width:20%; margin-bottom: 2%;" %>
+  <% end %>
+
+  <%= f.submit "Add to Cast", class: "btn btn-success" %>
+<% end %>

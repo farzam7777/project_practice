@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>Movie Detail</h1>
+
+  <h3> Title: <%= @movie.title %> </h3>
+  <p> Description: <%= @movie.description %> </p>
+  <p> <strong> Trailor </strong> </p>
+
+  <% if @movie.trailor.split('/')[-2] == "www.youtube.com" %>
+    <p> <iframe width="650" height="350" src="http://www.youtube.com/embed/<%= @movie.trailor.split('=')[-1]%>"  frameborder="0"></iframe> </p>
+  <% else %>
+    <p> <iframe src="https://player.vimeo.com/video/<%= @movie.trailor.split('/')[-1] %>" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </p>
+  <% end %>
+
+  <%= link_to "Back", :back, class: "btn btn-success" %>
+  <%= link_to "Edit", edit_movie_path(@movie), class: "btn btn-info" %>
+  <%= link_to "Delete", @movie, method: :delete, class: "btn btn-danger" %>
+  <%= link_to "All Movies", movies_path, class: "btn btn-primary" %> <hr>
+
+  <h2>Movie Cast</h2>
+
+  <div>
+    <ul id="cast_names">
+      <% @actors.each do |actor| %>
+        <li> <%= actor.name %> </li>
+      <% end %>
+    </ul> 
+  </div>
+  <hr>
+
+  <h2>Create Cast</h2>
+
+  <%= render "form_to_select_cast" %>
+
+</div>
