@@ -50,7 +50,7 @@ class MoviesController < ApplicationController
   def create_cast
     @movie = Movie.find(params[:id])
     @appearence = Appearence.create movie_id: params[:movie_id], actor_id: params[:actor_id]
-    @name = Actor.find(params[:actor_id]).name
+    @actor = Actor.find(params[:actor_id])
     @not_included_actors = Actor.all.where("id NOT IN (Select actor_id from appearences where movie_id = ?)", @movie.id)
 
     respond_to do |format|
@@ -59,6 +59,20 @@ class MoviesController < ApplicationController
         format.js
       else
         format.html { redirect_to movie_path(@movie), notice: "Some Problem occured while adding cast. " }
+        format.js
+      end
+    end
+  end
+
+  def remove_cast
+    @appearence = Appearence.where(movie_id: params[:id], actor_id: params[:actor_id]).select("id")
+    @actor = params[:actor_id]
+    respond_to do |format|
+      if Appearence.destroy(@appearence)
+        format.html { redirect_to movie_path(params[:id]), notice: "Actor is successfully removed. " }
+        format.js
+      else
+        format.html { redirect_to movie_path(params[:id]), notice: "Actor is not successfully removed. " }
         format.js
       end
     end

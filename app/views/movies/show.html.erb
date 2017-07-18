@@ -2,7 +2,7 @@
   <h1>Movie Detail</h1>
 
   <h3> Title: <%= @movie.title %> </h3>
-  <p> Description: <%= @movie.description %> </p>
+  <p> Description: <%= raw(@movie.description) %> </p>
   <p> <strong> Trailor </strong> </p>
 
   <% if @movie.trailor.split('/')[-2] == "www.youtube.com" %>
@@ -19,14 +19,9 @@
 
   <h2>Movie Cast</h2>
 
-  <div>
-    <ul id="cast_names">
-      <% @actors.each do |actor| %>
-        <li> <%= actor.name %> </li>
-      <% end %>
-    </ul> 
-  </div>
-  <hr>
+  <ul id="cast_names">
+    <%= render @actors %>
+  </ul> <hr>
 
   <h2>Create Cast</h2>
 

@@ -1,0 +1,3 @@
+<li id="actor_<%= actor.id %>"> 
+  <%= actor.name %>  <%= link_to "remove", remove_cast_movie_path(actor_id: actor.id), remote: true, style: "margin-left: 3%;" %> 
+</li>

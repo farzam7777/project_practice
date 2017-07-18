@@ -1,2 +1,2 @@
-$("ul#cast_names").append($("<li />").html("<%= @name.html_safe %>"))
+$("#cast_names").append("<%= j render @actor %>")
  $('#movie_actors_id').html("<%= escape_javascript options_from_collection_for_select(@not_included_actors, :id, :name) %>");

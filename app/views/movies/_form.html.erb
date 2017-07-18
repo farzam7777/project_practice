@@ -3,7 +3,7 @@
   <%= f.text_field :title, class: "form-control" %> <br>
 
   <%= f.label :description, "Description" %> <br>
-  <%= f.text_area :description, class: "form-control" %> <br>
+  <%= f.cktext_area :description, class: "form-control", ckeditor: { language: 'english'} %> <br>
 
   <%= f.label :trailor, "Trailor" %> <br>
   <%= f.text_field :trailor, class: "form-control" %> <br>
